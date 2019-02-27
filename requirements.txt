@@ -28,8 +28,6 @@ html5lib==1.0.1
 idna==2.7
 kiwisolver==1.0.1
 Markdown==3.0.1
-mathplotlib==0.1
-matplotlib==2.2.3
 mock==2.0.0
 more-itertools==4.3.0
 numpy==1.16.1
