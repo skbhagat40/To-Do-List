@@ -40,9 +40,6 @@ py==1.7.0
 Pygments==2.3.1
 pyparsing==2.2.0
 pypiwin32==223
-PyQt5==5.11.2
-PyQt5-sip==4.19.12
-pyqt5-tools==5.11.2.1.3rc6
 pytest==3.9.1
 python-dateutil==2.7.3
 python-dotenv==0.9.1
