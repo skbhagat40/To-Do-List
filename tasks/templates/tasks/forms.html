@@ -10,6 +10,7 @@
   </div>
   <form method="post">
 {% for field in form %}
+{% csrf_token %}
     <div class="form-row">
     <label>{{field.label_tag}}</label>
         </div>
