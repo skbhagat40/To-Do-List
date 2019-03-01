@@ -1,5 +1,6 @@
 <html>
-<a href = "{% url 'tasks:homepage'%}">Home</a>
+{% include 'tasks/head_navbar.html' %}
+<a class ="sub-header" href = "{% url 'tasks:homepage'%}">Home</a>
 <h1>{{task}}</h1>
 <h2>{{task.Description}}</h2>
 <h2>Due date {{task.DueDate}}</h2>

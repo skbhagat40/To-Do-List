@@ -1,10 +1,23 @@
 <html>
-<h1>Welcome To The To-do-List</h1>
+{% include 'tasks/head_navbar.html' %}
+<section id = "showcase">
+	<div class="container">
 <a href = "{% url 'tasks:add_task' %}">Add a task here</a>
+</div>
+</section>
+<div class="sub-header">
+<div class="header">
+	<div class="container">
 <h2>List of Tasks</h2>
-<ul>
+</div>
+</div>
+</div>
+<div class="clr"> </div>
+<div class="categories">
+<ul >
 {% for task in all_tasks %}
-<li><a href = " {% url 'tasks:detail' task.id %}">{{task}}</a></li>
+<li class="list-item"><a href = " {% url 'tasks:detail' task.id %}">{{task}}</a></li>
 {% endfor %}
 </ul>
+</div>
 </html>
