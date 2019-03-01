@@ -1,0 +1,4 @@
+db.sqlite3
+tasks/migrations/__pycache__
+tasks/__pycache__
+todolist/__pycache__
