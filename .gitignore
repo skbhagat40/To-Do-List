@@ -1,1 +1,3 @@
 db.sqlite3
+tasks/migrations
+tasks/__pycache__
