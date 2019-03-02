@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedict
+from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from .models import Tasks
 from django.urls import reverse,reverse_lazy
