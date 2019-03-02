@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import generic
 from .models import Tasks
@@ -26,3 +26,4 @@ class UpdateTask(generic.UpdateView):
 class DeleteTask(generic.DeleteView):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
+

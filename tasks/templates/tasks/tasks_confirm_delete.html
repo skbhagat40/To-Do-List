@@ -1,4 +1,15 @@
+<html>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'tasks/task_confirm_delete.css' %}">
 <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
+    <div class="popup">
+  <p>Are you sure you want to Delete "{{object}}" ?</p>
+  <div class="text-right">
+    
+    <button class="btn btn-primary">Ok</button>
+     <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+</form
+  </div>
+</div>
 </form>
+</html>
