@@ -2,3 +2,8 @@
 {% block title %}
 Login
 {% endblock %}
+{% block register %}
+ <div class="form-create-an-account">
+    <a href="{% url 'tasks:register' %}">Dont have an account Register Here</a>
+  </div>
+{% endblock %}
