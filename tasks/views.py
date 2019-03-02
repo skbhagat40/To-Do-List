@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import Tasks
 from django.urls import reverse,reverse_lazy
@@ -27,3 +27,12 @@ class DeleteTask(generic.DeleteView):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
 
+    def get_success_url(self):
+        return DeleteTask.success_url
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            url = self.get_success_url()
+            return HttpResponseRedirect(url)
+        else:
+            return super(DeleteTask, self).post(request, *args, **kwargs)
