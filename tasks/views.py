@@ -26,3 +26,14 @@ class UpdateTask(generic.UpdateView):
 class DeleteTask(generic.DeleteView):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
+
+    def get_success_url(self):
+        return DeleteTas.success_url
+
+    
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            url = self.get_success_url()
+            return HttpResponseRedirect(url)
+        else:
+            return super(DeleteTask, self).post(request, *args, **kwargs)
