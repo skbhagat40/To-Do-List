@@ -16,11 +16,11 @@ class DetailView(generic.DetailView):
     model = Tasks
     context_object_name = 'task'
 class CreateTask(generic.CreateView):
-    template_name = 'tasks/forms_template.html'
+    template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
 class UpdateTask(generic.UpdateView):
-    template_name = 'tasks/forms_template.html'
+    template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
 class DeleteTask(generic.DeleteView):

@@ -111,3 +111,28 @@ background: lightgreen;
 	margin-left: 50px;
 	/*list-style-image: url('../images/check.png')*/
 }
+#mainbar{
+	color: yellow;
+	float: left;
+	width: 70%;
+	padding: 0 30px;
+	box-sizing: border-box;
+}
+#navbar2{
+	background-color: white;
+	color:blue;
+}
+#navbar2 ul{
+	padding: 0px;
+	list-style: none;
+}
+#navbar2 li{
+	display: inline;
+	padding: 5px;
+}
+#navbar2 a{
+	color: black;
+	text-decoration: none;
+	font-size: 18px;
+	font-family:Arial;
+}
