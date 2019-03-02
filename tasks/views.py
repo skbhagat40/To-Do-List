@@ -16,6 +16,16 @@ from django.contrib.auth import authenticate
 
 
 class IndexView(generic.ListView):
+
+    def get(self, request):
+        is_logged_in = request.user.is_authenticated
+
+        if not is_logged_in :
+            url = reverse_lazy('tasks:login')
+            return HttpResponseRedirect(url)
+        else:
+            return super.get(*args,**kwargs)
+        
     template_name = 'tasks/home.html'
     context_object_name = 'all_tasks'
     
