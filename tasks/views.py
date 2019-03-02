@@ -4,6 +4,10 @@ from django.views import generic
 from .models import Tasks
 from django.urls import reverse,reverse_lazy
 from django.forms import DateInput
+from .forms import LoginForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
@@ -39,3 +43,27 @@ class DeleteTask(generic.DeleteView):
             return HttpResponseRedirect(url)
         else:
             return super(DeleteTask, self).post(request, *args, **kwargs)
+class LoginView(generic.edit.FormView):
+    template_name = 'tasks/login.html'
+    #context_object_name = 'login_object'
+    form_class = AuthenticationForm
+    success_url = reverse_lazy('tasks:homepage')
+    '''def form_valid(self,form):
+        user = AuthenticationForm(data = self.request.POST)
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(username=username,password=password)
+        if user is not None:
+            return HttpResponse('Welcomt Dude!')
+        else:
+            return HttpResponse('Please try Again!')
+        return super(LoginView,self).form_valid(form)'''
+
+class RegisterView(generic.CreateView):
+    template_name = 'tasks/register.html'
+    success_url = reverse_lazy('tasks:homepage')
+    #context_object_name = 'register_object'
+    model = User
+    fields = ['username','password','email','first_name','last_name']
+    success_url = reverse_lazy('tasks:homepage')
+    
