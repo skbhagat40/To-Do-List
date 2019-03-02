@@ -3,6 +3,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.views import generic
 from .models import Tasks
 from django.urls import reverse,reverse_lazy
+from django.forms import DateInput
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
@@ -19,6 +20,7 @@ class CreateTask(generic.CreateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
+    
 class UpdateTask(generic.UpdateView):
     template_name = 'tasks/forms.html'
     model = Tasks

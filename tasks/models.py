@@ -4,7 +4,7 @@ from django.urls import reverse,reverse_lazy
 class Tasks(models.Model):
     TaskName = models.CharField(max_length = 100)
     Description = models.CharField(max_length = 400)
-    DueDate = models.DateField()
+    DueDate = models.DateField(help_text="YY-MM-DD")
     priority = models.IntegerField()
 
     def __str__(self):
