@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
 from django.views import generic
 from .models import Tasks
 from django.urls import reverse,reverse_lazy
@@ -11,24 +13,34 @@ from django.contrib.auth import authenticate
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
+
+
 class IndexView(generic.ListView):
     template_name = 'tasks/home.html'
     context_object_name = 'all_tasks'
+    
     def get_queryset(self):
         return Tasks.objects.all()
+
+    
 class DetailView(generic.DetailView):
     template_name = 'tasks/detail.html'
     model = Tasks
     context_object_name = 'task'
+
+
 class CreateTask(generic.CreateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
+
     
 class UpdateTask(generic.UpdateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
+
+    
 class DeleteTask(generic.DeleteView):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
@@ -36,13 +48,14 @@ class DeleteTask(generic.DeleteView):
     def get_success_url(self):
         return DeleteTask.success_url
 
-    
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
             url = self.get_success_url()
             return HttpResponseRedirect(url)
         else:
             return super(DeleteTask, self).post(request, *args, **kwargs)
+
+        
 class LoginView(generic.edit.FormView):
     template_name = 'tasks/login.html'
     #context_object_name = 'login_object'
@@ -58,6 +71,7 @@ class LoginView(generic.edit.FormView):
         else:
             return HttpResponse('Please try Again!')
         return super(LoginView,self).form_valid(form)'''
+
 
 class RegisterView(generic.CreateView):
     template_name = 'tasks/register.html'

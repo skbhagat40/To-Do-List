@@ -6,10 +6,12 @@
 {% block f1 %}<h3>Description - {{task.Description}}</h3>{% endblock %}
 {% block f2 %}<h3>Due Date - {{task.DueDate}}</h3>{% endblock %}
 <br>
+<nav id="navbar2">
 <ul>
 <li>
 <a href = "{% url 'tasks:update_task' task.id %}">Edit Task</a></li>
 <li>
 <a href = "{% url 'tasks:delete_task' task.id %}">Delete Task</a></li>
 </ul>
+</nav>
 </html>
