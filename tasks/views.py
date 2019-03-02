@@ -17,6 +17,7 @@ from django.contrib.auth import authenticate
 
 class IndexView(generic.ListView):
 
+# adding authentication
     def get(self, request):
         is_logged_in = request.user.is_authenticated
 
