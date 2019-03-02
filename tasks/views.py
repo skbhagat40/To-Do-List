@@ -28,7 +28,7 @@ class DeleteTask(generic.DeleteView):
     success_url = reverse_lazy('tasks:homepage')
 
     def get_success_url(self):
-        return DeleteTas.success_url
+        return DeleteTask.success_url
 
     
     def post(self, request, *args, **kwargs):
