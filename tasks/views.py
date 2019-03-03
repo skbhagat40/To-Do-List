@@ -87,7 +87,6 @@ class LoginView(generic.edit.FormView):
         else:
             return super(LoginView,self).form_valid(form)
 
-
 class RegisterView(generic.CreateView):
     template_name = 'tasks/register.html'
     success_url = reverse_lazy('tasks:homepage')
@@ -95,10 +94,21 @@ class RegisterView(generic.CreateView):
     model = User
     fields = ['username','password','email','first_name','last_name']
 
-    def form_valid(self,form):
+    '''def form_valid(self,form):
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
-        return super(RegisterView,self).form_valid(form)
+        return super(RegisterView,self).form_valid(form)'''
+    def form_valid(self,form):
+        #form = self.form_class(request.POST) #form to take values from the request method
+        if form.is_valid():
+            user = form.save(commit = False)
+            username = form.cleaned_data['username'] # else would have used request.POST.get('var1')
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()
+            return redirect('tasks:homepage')
+        else:
+            return render(self.request,'tasks/register.html',{'form':form})
 
 def logout_view(request):
     logout(request)
