@@ -16,7 +16,6 @@ from django.contrib.auth import authenticate
 
 
 class IndexView(generic.ListView):
-
 # adding authentication
     def get(self, request):
         is_logged_in = request.user.is_authenticated
@@ -25,7 +24,7 @@ class IndexView(generic.ListView):
             url = reverse_lazy('tasks:login')
             return HttpResponseRedirect(url)
         else:
-            return super.get(*args,**kwargs)
+            return super(IndexView,self).get(self.request)
         
     template_name = 'tasks/home.html'
     context_object_name = 'all_tasks'
@@ -72,16 +71,15 @@ class LoginView(generic.edit.FormView):
     #context_object_name = 'login_object'
     form_class = AuthenticationForm
     success_url = reverse_lazy('tasks:homepage')
-    '''def form_valid(self,form):
+    def form_valid(self,form):
         user = AuthenticationForm(data = self.request.POST)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(username=username,password=password)
         if user is not None:
-            return HttpResponse('Welcomt Dude!')
+            return HttpResponseRedirect(reverse('tasks:homepage'))
         else:
-            return HttpResponse('Please try Again!')
-        return super(LoginView,self).form_valid(form)'''
+            return super(LoginView,self).form_valid(form)
 
 
 class RegisterView(generic.CreateView):
@@ -90,5 +88,4 @@ class RegisterView(generic.CreateView):
     #context_object_name = 'register_object'
     model = User
     fields = ['username','password','email','first_name','last_name']
-    success_url = reverse_lazy('tasks:homepage')
-    
+
