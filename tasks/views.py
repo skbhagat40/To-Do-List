@@ -76,7 +76,7 @@ class LoginView(generic.edit.FormView):
     form_class = AuthenticationForm
     success_url = reverse_lazy('tasks:homepage')
     def form_valid(self,form):
-        user = AuthenticationForm(data = self.request.POST)
+        #user = AuthenticationForm(data = self.request.POST)
         username = form.cleaned_data['username']
         password = form.cleaned_data['password']
         user = authenticate(username=username,password=password)
