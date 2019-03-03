@@ -9,7 +9,7 @@ from django.forms import DateInput
 from .forms import LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,logout,login
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
@@ -30,7 +30,7 @@ class IndexView(generic.ListView):
     context_object_name = 'all_tasks'
     
     def get_queryset(self):
-        return Tasks.objects.all()
+        return Tasks.objects.filter(user=self.request.user)
 
     
 class DetailView(generic.DetailView):
@@ -43,6 +43,10 @@ class CreateTask(generic.CreateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(CreateTask, self).form_valid(form)
 
     
 class UpdateTask(generic.UpdateView):
@@ -77,6 +81,7 @@ class LoginView(generic.edit.FormView):
         password = form.cleaned_data['password']
         user = authenticate(username=username,password=password)
         if user is not None:
+            login(self.request,user)
             return HttpResponseRedirect(reverse('tasks:homepage'))
         else:
             return super(LoginView,self).form_valid(form)
@@ -89,3 +94,6 @@ class RegisterView(generic.CreateView):
     model = User
     fields = ['username','password','email','first_name','last_name']
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect(reverse_lazy('tasks:homepage'))
