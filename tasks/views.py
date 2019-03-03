@@ -10,6 +10,7 @@ from .forms import LoginForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,logout,login
+from .forms import LoginForm
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
@@ -73,13 +74,13 @@ class DeleteTask(generic.DeleteView):
 class LoginView(generic.edit.FormView):
     template_name = 'tasks/login.html'
     #context_object_name = 'login_object'
-    form_class = AuthenticationForm
+    form_class = LoginForm
     success_url = reverse_lazy('tasks:homepage')
     def form_valid(self,form):
         #user = AuthenticationForm(data = self.request.POST)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(username=username,password=password)
+        Username = form.cleaned_data['Username']
+        Password = form.cleaned_data['Password']
+        user = authenticate(self.request,username=Username,password=Password)
         if user is not None:
             login(self.request,user)
             return HttpResponseRedirect(reverse('tasks:homepage'))
@@ -93,6 +94,11 @@ class RegisterView(generic.CreateView):
     #context_object_name = 'register_object'
     model = User
     fields = ['username','password','email','first_name','last_name']
+
+    def form_valid(self,form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        return super(RegisterView,self).form_valid(form)
 
 def logout_view(request):
     logout(request)
