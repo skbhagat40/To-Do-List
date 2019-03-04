@@ -42,11 +42,15 @@ class DetailView(generic.DetailView,LoginRequiredMixin):
     model = Tasks
     context_object_name = 'task'
 
-    def get_object(self, queryset=None):
+    '''def get_object(self, queryset=None):
         obj = super(DetailView, self).get_object(queryset=queryset)
         if obj.user != self.request.user:
             raise Http404()
-        return obj
+        return obj'''
+    
+    def get_queryset(self):
+        queryset = super(DetailView, self).get_queryset()
+        return queryset.filter(user=self.request.user)
 
 
 class CreateTask(generic.CreateView,LoginRequiredMixin):
