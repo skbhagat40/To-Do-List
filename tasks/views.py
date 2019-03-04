@@ -12,6 +12,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate,logout,login
 from .forms import LoginForm
 from django import forms
+from django.http import Http404
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 #def home(request):
 #    return render(request,'tasks/home.html')
@@ -35,13 +37,19 @@ class IndexView(generic.ListView):
         return Tasks.objects.filter(user=self.request.user)
 
     
-class DetailView(generic.DetailView):
+class DetailView(generic.DetailView,LoginRequiredMixin):
     template_name = 'tasks/detail.html'
     model = Tasks
     context_object_name = 'task'
 
+    def get_object(self, queryset=None):
+        obj = super(DetailView, self).get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404()
+        return obj
 
-class CreateTask(generic.CreateView):
+
+class CreateTask(generic.CreateView,LoginRequiredMixin):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
@@ -51,13 +59,13 @@ class CreateTask(generic.CreateView):
         return super(CreateTask, self).form_valid(form)
 
 
-class UpdateTask(generic.UpdateView):
+class UpdateTask(generic.UpdateView,LoginRequiredMixin):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
 
     
-class DeleteTask(generic.DeleteView):
+class DeleteTask(generic.DeleteView,LoginRequiredMixin):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
 
