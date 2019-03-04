@@ -77,8 +77,19 @@ class LoginView(generic.edit.FormView):
     #context_object_name = 'login_object'
     form_class = LoginForm
     success_url = reverse_lazy('tasks:homepage')
-
                 
+    def form_valid(self,form):
+        #user = AuthenticationForm(data = self.request.POST)
+        Username = form.cleaned_data['Username']
+        Password = form.cleaned_data['Password']
+        user = authenticate(self.request,username=Username,password=Password)
+        if user is not None:
+            login(self.request,user)
+            return HttpResponseRedirect(reverse('tasks:homepage'))
+        else:
+ 
+            return super(LoginView,self).form_valid(form)
+
 class RegisterView(generic.CreateView):
     template_name = 'tasks/register.html'
     success_url = reverse_lazy('tasks:homepage')
