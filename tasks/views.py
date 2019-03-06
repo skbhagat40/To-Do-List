@@ -14,8 +14,8 @@ from .forms import LoginForm
 from django import forms
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
+from allauth.account.views import LoginView, SignupView
+from allauth.socialaccount.views import ConnectionsView
 class IndexView(generic.ListView):
 # adding authentication
 
@@ -116,3 +116,13 @@ class RegisterView(generic.CreateView):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse_lazy('tasks:homepage'))
+
+class ClientLoginView(LoginView):
+  template_name = 'tasks/login.html'
+
+  
+class ClientSignupView(SignupView):
+    template_name ='tasks/register.html'
+    #ClientSignupView.get_context_data()
+class SocialLogin(ConnectionsView):
+    template_name = 'tasks/login.html'

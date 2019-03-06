@@ -1,5 +1,5 @@
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url,include
 from . import views
 
 app_name = 'tasks'
@@ -12,4 +12,7 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name='login'),
     path('register', views.RegisterView.as_view(), name='register'),
     path('logout', views.logout_view, name='logout'),
+    path('login' , views.ClientLoginView.as_view(),name = 'allauth_login'),
+    path('signup' , views.ClientSignupView.as_view(),name = 'allauth_signup'),
+    path('social' , views.SocialLogin.as_view(),name = 'allauth_social'),
     ]
