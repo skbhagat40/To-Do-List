@@ -1,12 +1,15 @@
-{% extends 'tasks/generic_forms_template.html'%}
+{% extends 'tasks/forms.html'%}
+
 {% block title %}
-Login
-{% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-        {% endfor %}
+	Login
 {% endblock %}
-{% block register %}
+
+{% block heading %}
+	Login
+{% endblock %}
+
+{% block bottom %}
  <div class="form-create-an-account">
-    <a href="{% url 'tasks:register' %}">Dont have an account Register Here</a>
+    <a href="{% url 'tasks:register' %}">Don't have an account Register Here</a>
   </div>
 {% endblock %}

@@ -1,25 +1,29 @@
-{% load staticfiles %}
-<html>
-{% include 'tasks/head_navbar.html' %}
+{% extends '_base.html' %}
+{% load static %}
+
+
+{% block main_content_area %}
 <section id = "showcase">
 	<div class="container">
-<a href = "{% url 'tasks:add_task' %}">Add a task here</a>
-</div>
+		<a href = "{% url 'tasks:add_task' %}">Add a task here</a>
+	</div>
 </section>
+{% endblock %}
+
+{% block body_content %}
 <div class="sub-header">
-<div class="header">
-	<div class="container">
-<h2>List of Tasks</h2>
-</div>
-</div>
+	<div class="header">
+		<div class="container">
+			<h2>List of Tasks</h2>
+		</div>
+	</div>
 </div>
 <div class="clr"> </div>
 <div class="categories">
-<ul >
-{% for task in all_tasks %}
-<li class="list-item"><a href = " {% url 'tasks:detail' task.id %}">{{task}}</a></li>
-{% endfor %}
-</ul>
+	<ul >
+	{% for task in all_tasks %}
+		<li class="list-item"><a href = " {% url 'tasks:detail' task.id %}">{{task}}</a></li>
+	{% endfor %}
+	</ul>
 </div>
-<img src="{% static 'tasks/images/showcase.jpg'%}">
-</html>
+{% endblock %}

@@ -1,15 +1,15 @@
-<html>
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'tasks/task_confirm_delete.css' %}">
-<form method="post">{% csrf_token %}
-    <div class="popup">
-  <p>Are you sure you want to Delete "{{object}}" ?</p>
-  <div class="text-right">
-    
-    <input type="submit" value="Confirm" />
-      <input type="submit" name="cancel" value="Cancel" />
-</form
-  </div>
-</div>
-</form>
+{% load static %}
+<html>
+	<link rel="stylesheet" type="text/css" href="{% static 'tasks/task_confirm_delete.css' %}">
+	<form method="post">{% csrf_token %}
+	    <div class="popup">
+	  		<p>Are you sure you want to Delete "{{object}}" ?</p>
+	  		<div class="text-right">
+	    
+	    	<input type="submit" value="Confirm" />
+	      	<input type="submit" name="cancel" value="Cancel" />
+	  		</div>
+		</div>
+	</form>
 </html>

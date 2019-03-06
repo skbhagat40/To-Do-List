@@ -1,30 +1,36 @@
-<html>
-{% include 'tasks/head_navbar.html' %}
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'tasks/forms.css' %}">
-<body>
-<div class="form-login">
-  <div class="form-log-in-with-email">
-  <div class="form-title-row">
-        <h1>Enter Task Details Here</h1>
-        {{form.errors}}
-  </div>
-  <form method="post">
-{% for field in form %}
-{% csrf_token %}
-    <div class="form-row">
-    <label>{{field.label_tag}}</label>
-    <p>
-       {{field.help_text}}
-    </p>
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'tasks/forms.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'tasks/base.css' %}">
+      <title>{% block title %}{% endblock %}</title>
+      {% block top %}{% endblock %}
+  </head>
+
+  <div class="form-login">
+    <div class="form-log-in-with-email">
+      <div class="form-title-row">
+            <h1>{% block heading %}{% endblock %}</h1>
+            {{form.errors}}
+      </div>
+      <form method="post">
+        {% for field in form %}
+        {% csrf_token %}
+        <div class="form-row">
+          <label>{{field.label_tag}}</label>
+            <p>
+              {{field.help_text}}
+            </p>
         </div>
-    {{field}}
+        {{field}}
 
 
-{% endfor %}
-    <button type="submit" value="Submit">Submit</button>
-  </form>
-</div>
-</div>
-</body>
+        {% endfor %}
+        <button type="submit" value="Submit">Submit</button>
+      </form>
+          {% block bottom %}
+          {% endblock %}
+    </div>
+    </div>
 </html>

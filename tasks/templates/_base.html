@@ -1,12 +1,31 @@
+{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>To-Do-List{% block title %}{% endblock %}</title>
-	{% block cssfiles %}
-		<link rel="stylesheet" type="text/css" href="">
+	<head>
+		<div class="main-header">
+			<div class="header">
+				<h1>Welcome To The To-do-List</h1>
+			</div>
+		</div>
+		{% block cssfiles %}
+			<link rel="stylesheet" type="text/css" href="{% static 'tasks/base.css'%}">
+		{% endblock %}
+		{% block jsfiles %}{% endblock %}
+	</head>
+	
+	<nav id ="navbar">
+		<div class="container">
+			<ul class="list">
+				<li class="list-item"><a href="{% url 'tasks:homepage'%}">Home</a></li>
+				<li><a href="{% url 'tasks:add_task' %}">Add a task</a></li>
+				<li><a href="{% url 'tasks:logout' %}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	{% block main_content_area %}
 	{% endblock %}
-</head>
-<body>
-
-</body>
+	<body>
+		{% block body_content %}{% endblock %}
+	</body>
 </html>
