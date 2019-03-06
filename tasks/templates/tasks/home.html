@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <html>
 {% include 'tasks/head_navbar.html' %}
 <section id = "showcase">
@@ -20,4 +21,5 @@
 {% endfor %}
 </ul>
 </div>
+<img src="{% static 'tasks/images/showcase.jpg'%}">
 </html>

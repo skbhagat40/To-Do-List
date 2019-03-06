@@ -14,13 +14,11 @@ from .forms import LoginForm
 from django import forms
 from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
-# Create your views here.
-#def home(request):
-#    return render(request,'tasks/home.html')
 
 
 class IndexView(generic.ListView):
 # adding authentication
+
     def get(self, request):
         is_logged_in = request.user.is_authenticated
 
@@ -42,12 +40,6 @@ class DetailView(LoginRequiredMixin,generic.DetailView):
     model = Tasks
     context_object_name = 'task'
 
-    '''def get_object(self, queryset=None):
-        obj = super(DetailView, self).get_object(queryset=queryset)
-        if obj.user != self.request.user:
-            raise Http404()
-        return obj'''
-    
     def get_queryset(self):
         queryset = super(DetailView, self).get_queryset()
         return queryset.filter(user=self.request.user)
@@ -85,12 +77,10 @@ class DeleteTask(LoginRequiredMixin,generic.DeleteView):
         
 class LoginView(generic.edit.FormView):
     template_name = 'tasks/login.html'
-    #context_object_name = 'login_object'
     form_class = LoginForm
     success_url = reverse_lazy('tasks:homepage')
                 
     def form_valid(self,form):
-        #user = AuthenticationForm(data = self.request.POST)
         Username = form.cleaned_data['Username']
         Password = form.cleaned_data['Password']
         user = authenticate(self.request,username=Username,password=Password)
@@ -104,25 +94,18 @@ class LoginView(generic.edit.FormView):
 class RegisterView(generic.CreateView):
     template_name = 'tasks/register.html'
     success_url = reverse_lazy('tasks:homepage')
-    #context_object_name = 'register_object'
     model = User
     fields = ['username','password','email','first_name','last_name']
 
-    '''def form_valid(self,form):
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        return super(RegisterView,self).form_valid(form)'''
     def get_form(self,form_class=None):
             form = super(RegisterView,self).get_form(form_class)
             form.fields['password'].widget = forms.PasswordInput()
             return form
         
     def form_valid(self,form):
-        #form = self.form_class(request.POST) #form to take values from the request method
-    
         if form.is_valid():
             user = form.save(commit = False)
-            username = form.cleaned_data['username'] # else would have used request.POST.get('var1')
+            username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()
