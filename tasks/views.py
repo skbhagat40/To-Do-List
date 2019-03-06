@@ -82,7 +82,6 @@ class DeleteTask(generic.DeleteView,LoginRequiredMixin):
             return HttpResponseRedirect(url)
         else:
             return super(DeleteTask, self).post(request, *args, **kwargs)
-
         
 class LoginView(generic.edit.FormView):
     template_name = 'tasks/login.html'
