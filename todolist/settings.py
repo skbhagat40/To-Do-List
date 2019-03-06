@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    
     )
 
 
@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.facebook',
 ]
+
+LOGIN_REDIRECT_URL = '/'
 
 SITE_ID = 1
 

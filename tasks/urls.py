@@ -12,5 +12,7 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name='login'),
     path('register', views.RegisterView.as_view(), name='register'),
     path('logout', views.logout_view, name='logout'),
-    path('login_allauth', include('allauth.urls')),
+    path('login' , views.ClientLoginView.as_view(),name = 'allauth_login'),
+    path('signup' , views.ClientSignupView.as_view(),name = 'allauth_signup'),
+    path('social' , views.SocialLogin.as_view(),name = 'allauth_social'),
     ]
