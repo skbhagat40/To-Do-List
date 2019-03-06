@@ -12,7 +12,9 @@
     <div class="form-log-in-with-email">
       <div class="form-title-row">
             <h1>{% block heading %}{% endblock %}</h1>
-            {{form.errors}}
+            {% for error in form.errors.values %}
+            {{error}}
+            {% endfor %}
       </div>
       <form method="post">
         {% for field in form %}
