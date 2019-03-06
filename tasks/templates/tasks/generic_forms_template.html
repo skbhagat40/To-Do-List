@@ -1,13 +1,11 @@
 <html>
-{% include 'tasks/head_navbar.html' %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'tasks/forms.css' %}">
 <body>
 <div class="form-login">
   <div class="form-log-in-with-email">
   <div class="form-title-row">
-        <h1>Enter Task Details Here</h1>
-        {{form.errors}}
+        <h1>{% block title %}{% endblock %}</h1>
   </div>
   <form method="post">
 {% for field in form %}
@@ -24,6 +22,9 @@
 {% endfor %}
     <button type="submit" value="Submit">Submit</button>
   </form>
+  {% block register %}
+
+  {% endblock %}
 </div>
 </div>
 </body>

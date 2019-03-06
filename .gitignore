@@ -2,3 +2,6 @@ db.sqlite3
 tasks/migrations/__pycache__
 tasks/__pycache__
 todolist/__pycache__
+
+tasks/**/__pycache__
+todolis/**/**/__pycache__
