@@ -37,7 +37,7 @@ class IndexView(generic.ListView):
         return Tasks.objects.filter(user=self.request.user)
 
     
-class DetailView(generic.DetailView,LoginRequiredMixin):
+class DetailView(LoginRequiredMixin,generic.DetailView):
     template_name = 'tasks/detail.html'
     model = Tasks
     context_object_name = 'task'
@@ -53,7 +53,7 @@ class DetailView(generic.DetailView,LoginRequiredMixin):
         return queryset.filter(user=self.request.user)
 
 
-class CreateTask(generic.CreateView,LoginRequiredMixin):
+class CreateTask(LoginRequiredMixin,generic.CreateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
@@ -63,13 +63,13 @@ class CreateTask(generic.CreateView,LoginRequiredMixin):
         return super(CreateTask, self).form_valid(form)
 
 
-class UpdateTask(generic.UpdateView,LoginRequiredMixin):
+class UpdateTask(LoginRequiredMixin,generic.UpdateView):
     template_name = 'tasks/forms.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
 
     
-class DeleteTask(generic.DeleteView,LoginRequiredMixin):
+class DeleteTask(LoginRequiredMixin,generic.DeleteView):
     model = Tasks
     success_url = reverse_lazy('tasks:homepage')
 
