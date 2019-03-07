@@ -48,6 +48,11 @@
                     <i class="material-icons">exit_to_app</i> Logout
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="{% url 'tasks:logout' %}" class="nav-link">
+                    <i class="material-icons">person</i> {{user}}
+                  </a>
+                </li>
               </ul>
             </div>
             <!-- /.navbar-collapse -->
