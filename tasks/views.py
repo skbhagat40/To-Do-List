@@ -16,6 +16,8 @@ from django.http import Http404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from allauth.account.views import LoginView, SignupView
 from allauth.socialaccount.views import ConnectionsView
+
+
 class IndexView(generic.ListView):
 # adding authentication
 
@@ -28,7 +30,7 @@ class IndexView(generic.ListView):
         else:
             return super(IndexView,self).get(self.request)
         
-    template_name = 'tasks/home.html'
+    template_name = 'tasks/todolist40.html'
     context_object_name = 'all_tasks'
     
     def get_queryset(self):
@@ -116,6 +118,9 @@ class RegisterView(generic.CreateView):
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse_lazy('tasks:homepage'))
+
+def about_me(request):
+    return render(request,'tasks/about_me.html')
 
 class ClientLoginView(LoginView):
   template_name = 'tasks/login.html'

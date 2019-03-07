@@ -3,29 +3,18 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<div class="main-header">
-			<div class="header">
-				<h1>Welcome To The To-do-List</h1>
-			</div>
-		</div>
+		{% block head_content_area %}
+		{% endblock %}
 		{% block cssfiles %}
-			<link rel="stylesheet" type="text/css" href="{% static 'tasks/base.css'%}">
+			
 		{% endblock %}
 		{% block jsfiles %}{% endblock %}
 	</head>
-	
-	<nav id ="navbar">
-		<div class="container">
-			<ul class="list">
-				<li class="list-item"><a href="{% url 'tasks:homepage'%}">Home</a></li>
-				<li><a href="{% url 'tasks:add_task' %}">Add a task</a></li>
-				<li><a href="{% url 'tasks:logout' %}">Logout</a></li>
-			</ul>
-		</div>
-	</nav>
 	{% block main_content_area %}
 	{% endblock %}
 	<body>
 		{% block body_content %}{% endblock %}
+		{% block main_footer %}{% endblock %}
+		{% block jsfiles_bottom %}{% endblock %}
 	</body>
 </html>
