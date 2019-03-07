@@ -15,4 +15,5 @@ urlpatterns = [
     path('login' , views.ClientLoginView.as_view(),name = 'allauth_login'),
     path('signup' , views.ClientSignupView.as_view(),name = 'allauth_signup'),
     path('social' , views.SocialLogin.as_view(),name = 'allauth_social'),
+    path('about_me', views.about_me, name = 'about'),
     ]

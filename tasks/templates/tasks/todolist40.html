@@ -1,0 +1,30 @@
+{% extends 'tasks/common_base.html' %}
+{% load static %}
+{% block head_container %}<div class="page-header header-filter clear-filter " data-parallax="true" style= "background-image: url('{% static 'assets/img/site_bakg.jpg' %}');">{% endblock %}
+{% block title %} Home{% endblock %}
+{% block center_text %}To Do Lists{% endblock %}
+{% block sub_center_text %}Get Things Done!{% endblock %}
+
+
+{%block body_style %}<body class="index-page sidebar-collapse">{% endblock %}
+  {% block detail_content %}
+   <div class="main main-raised">
+    <div class="section section-basic">
+      <div class="container">
+        <div class="title">
+          <h2>List Of Tasks</h2>
+        </div>
+        <!--  buttons -->
+        {% for task in all_tasks %}
+          <div class="row">
+            <div class="tim-typo">
+              <h3>
+                <span class = "col-4"><i class="material-icons">alarm</i></span><span class="col-md-8"><a href = " {% url 'tasks:detail' task.id %}">{{task}}</a></span></h3>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
