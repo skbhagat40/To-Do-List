@@ -9,7 +9,7 @@
 {%block body_style %}<body class="index-page sidebar-collapse">{% endblock %}
   {% block detail_content %}
    <div class="main main-raised">
-    <div class="section section-basic">
+    <div class="profile-content">
       <div class="container">
         <div class="title">
           <h2>Task Details</h2>
@@ -40,11 +40,11 @@
       <nav class="float-left">
         <ul>
           <li>
-            <a href="{% url 'tasks:update_task' task.pk %}">
+            <a href="{% url 'tasks:delete_task' task.pk %}"><i class="material-icons">edit</i>
               Edit Task
             </a></li>
            <li>
-            <a href="{% url 'tasks:delete_task' task.pk %}">
+            <a href="{% url 'tasks:delete_task' task.pk %}"><i class="material-icons">delete</i>
               Delete Task
             </a></li>
         </ul>

@@ -11182,6 +11182,9 @@ label {
   margin-bottom: 25px;
   min-height: 32px;
 }
+.title .my_title{
+  margin-top: 10px;
+}
 
 #map {
   position: relative;
@@ -17344,7 +17347,7 @@ footer .pull-center {
 }
 
 .section {
-  padding: 70px 0;
+  padding: 20px 0;
 }
 
 .profile-page .page-header {
