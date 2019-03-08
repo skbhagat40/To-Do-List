@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'bootstrap4',
 ]
 
 LOGIN_REDIRECT_URL = '/'
