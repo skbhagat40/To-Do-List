@@ -56,11 +56,19 @@ class CreateTask(LoginRequiredMixin,generic.CreateView):
         form.instance.user = self.request.user
         return super(CreateTask, self).form_valid(form)
 
+    
+
 
 class UpdateTask(LoginRequiredMixin,generic.UpdateView):
     template_name = 'tasks/new_task.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
+
+    def get_object(self, queryset=None):
+        obj = super(UpdateTask, self).get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404()
+        return obj
 
     
 class DeleteTask(LoginRequiredMixin,generic.DeleteView):
@@ -76,6 +84,12 @@ class DeleteTask(LoginRequiredMixin,generic.DeleteView):
             return HttpResponseRedirect(url)
         else:
             return super(DeleteTask, self).post(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(DeleteTask, self).get_object(queryset=queryset)
+        if obj.user != self.request.user:
+            raise Http404()
+        return obj
         
 class LoginView(generic.edit.FormView):
     template_name = 'tasks/login.html'
