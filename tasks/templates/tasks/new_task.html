@@ -52,6 +52,7 @@
 {% block heading %}
 	Enter Task Details Here
 {% endblock %}
+{% block cancel_button %}<span class="col-md-6"><a href="{% url 'tasks:homepage' %}" class="btn btn-default">Cancel</a></span>{% endblock %}
 {% block bottom %}
     <footer class="footer footer-default">
     <div class="container">

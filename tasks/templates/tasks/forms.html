@@ -28,7 +28,7 @@
           <div class="container">
             <div class="row">
               <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-                <div class="card card-login">
+                <div class="card card-login" style="margin-top: 50px">
                   <div class="card-header card-header-primary text-center">
                     <h3>{% block heading %}{% endblock %}</h3>
             {% for error in form.errors.values %}
@@ -55,7 +55,10 @@
         {% endfor %}
         
                     <div class="row d-flex p-2 justify-content-center">
-                      <button type="submit" value="Submit">Submit</button>
+                      <span class="col-md-6"><button type="submit" value="Submit" class = "btn btn-default">Submit</button></span>
+                    
+                    
+                      {% block cancel_button %}{% endblock %}
                     </div>
                   </form>
           {% block bottom %}

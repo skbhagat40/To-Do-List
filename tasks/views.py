@@ -58,7 +58,7 @@ class CreateTask(LoginRequiredMixin,generic.CreateView):
 
 
 class UpdateTask(LoginRequiredMixin,generic.UpdateView):
-    template_name = 'tasks/forms.html'
+    template_name = 'tasks/new_task.html'
     model = Tasks
     fields = ['TaskName','Description','DueDate','priority']
 
