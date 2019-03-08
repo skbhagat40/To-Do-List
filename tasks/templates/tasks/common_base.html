@@ -1,30 +1,31 @@
 {% extends '_base.html' %}
 {% load static %}
 {% block head_content_area %}
+
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="{% static 'assets/img/apple-icon.png' %}">
-  <link rel="icon" type="image/jpg" href="{% static 'assets/img/my_icon.jpg' %}">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
+    <link rel="icon" type="image/jpg" href="{% static 'assets/img/my_icon.jpg' %}">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+      <title>
     {% block title %}{% endblock %}
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-  <!-- CSS Files -->
-  <link href="{% static 'assets/css/material-kit.css?v=2.0.5' %}" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{% static 'assets/demo/demo.css' %}" rel="stylesheet" />
-
-</head>
+      <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+      <!--     Fonts and icons     -->
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+        <!-- CSS Files -->
+        <link href="{% static 'assets/css/material-kit.css?v=2.0.5' %}" rel="stylesheet" />
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link href="{% static 'assets/demo/demo.css' %}" rel="stylesheet" />
+      </head>
 {% endblock %}
 {% block main_content_area %}
 {%block body_style %}{% endblock %}
 
-  <div id="navbar">
-        <nav class="navbar navbar-default navbar-color-on-scroll fixed-top navbar-expand-lg" role="navigation-demo">
+  
+      <div id="navbar">
+        <nav class="navbar navbar-transpatent navbar-color-on-scroll fixed-top navbar-expand-lg" role="navigation-demo">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-translate">
@@ -41,23 +42,26 @@
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                   <a href="{% url 'tasks:add_task' %}" class="nav-link">
-                     <i class="material-icons">add</i> Add a Task
+                    <i class="material-icons">add</i> Add a Task
+                  
                   </a>
                 </li>
                 <li class="dropdown nav-item">
-                    <a href="#pablo" class=" dropdown-toggle nav-link" data-toggle="dropdown">
-                      <div class="profile-photo-small">
-                        <i class="material-icons">person</i>{{user}}
-                      </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <h6 class="dropdown-header">Dropdown header</h6>
-                      <a href="{% url 'tasks:logout' %}" class="nav-link">
-                          <i class="material-icons">exit_to_app</i> Logout
-                      </a>
-                      <a href="#pablo" class="dropdown-item">Settings and other stuff</a>
-                      <a href="#pablo" class="dropdown-item">Sign out</a>
+                  <a href="#pablo" class=" dropdown-toggle nav-link" data-toggle="dropdown">
+                    <div class="profile-photo-small">
+                      <i class="material-icons">person</i>{{user}}
+                      
                     </div>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <h6 class="dropdown-header">Dropdown header</h6>
+                    <a href="{% url 'tasks:logout' %}" class="nav-link">
+                      <i class="material-icons">exit_to_app</i> Logout
+                      
+                    </a>
+                    <a href="#pablo" class="dropdown-item">Settings and other stuff</a>
+                    <a href="#pablo" class="dropdown-item">Sign out</a>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -66,58 +70,65 @@
           <!-- /.container-->
         </nav>
           {% block head_container %}{% endblock %}
-    <div class="container" style="max-height: 30%">
-      <div class="row" style="max-height: 30%">
-        <div class="col-md-8 ml-auto mr-auto">
-          <div class="brand">
-            <h1 style="color: black">{% block center_text %}{% endblock %}</h1>
-            <h3 style="color: black">{% block sub_center_text %}{% endblock %}</h3>
+    
+        <div class="container" style="max-height: 30%">
+          <div class="row" style="max-height: 30%">
+            <div class="col-md-8 ml-auto mr-auto">
+              <div class="brand">
+                <h1 style="color: black">{% block center_text %}{% endblock %}</h1>
+                <h3 style="color: black">{% block sub_center_text %}{% endblock %}</h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
   
   {% block detail_content %}
   {% endblock %}
 
   {% block footer %}
-    <footer class="footer footer-default">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="{% url 'tasks:about' %}">
+    
+      <footer class="footer footer-default">
+        <div class="container">
+          <nav class="float-left">
+            <ul>
+              <li>
+                <a href="{% url 'tasks:about' %}">
               About Me
             </a>
-        </ul>
-      </nav>
-      <div class="copyright float-right">
+              </ul>
+            </nav>
+            <div class="copyright float-right">
         &copy;
-        <script>
+        
+              <script>
           document.write(new Date().getFullYear())
-        </script>, made with <i class="material-icons">favorite</i> by
-        <a href="https://www.creative-tim.com" target="_blank">Shailesh Kumar</a> for a better web.
-      </div>
-    </div>
-  </footer>
+        </script>, made with 
+              <i class="material-icons">favorite</i> by
+        
+              <a href="https://www.creative-tim.com" target="_blank">Shailesh Kumar</a> for a better web.
+      
+            </div>
+          </div>
+        </footer>
   {% endblock %}
   {% endblock %}
 {% block jsfiles_bottom %}
 
- <script src="{% static 'assets/js/core/jquery.min.js' %}" type="text/javascript"></script>
-  <script src="{% static 'assets/js/core/popper.min.js' %}" type="text/javascript"></script>
-  <script src="{% static 'assets/js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>
-  <script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
-  <!--  Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
-  <script src="{% static 'assets/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
-  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-  <script src="{% static 'assets/js/plugins/nouislider.min.js' %}" type="text/javascript"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-  <script src="{% static 'assets/js/material-kit.js?v=2.0.5' %}" type="text/javascript"></script>
-  <script>
+ 
+        <script src="{% static 'assets/js/core/jquery.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/js/core/popper.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
+        <!--  Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+        <script src="{% static 'assets/js/plugins/bootstrap-datetimepicker.js' %}" type="text/javascript"></script>
+        <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+        <script src="{% static 'assets/js/plugins/nouislider.min.js' %}" type="text/javascript"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+        <script src="{% static 'assets/js/material-kit.js?v=2.0.5' %}" type="text/javascript"></script>
+        <script>
     $(document).ready(function() {
       //init DateTimePickers
       materialKit.initFormExtendedDatetimepickers();

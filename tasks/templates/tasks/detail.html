@@ -1,58 +1,76 @@
 {% extends 'tasks/common_base.html' %}
 {% load static %}
-{% block head_container %}<div class="page-header header-filter clear-filter " data-parallax="true" style= "background-image: url('{% static 'assets/img/site_bakg.jpg' %}');">{% endblock %}
+{% block head_container %}
+<div class="page-header header-filter clear-filter " data-parallax="true" style= "background-image: url('{% static 'assets/img/site_bakg.jpg' %}');">{% endblock %}
 {% block title %} Home{% endblock %}
 {% block center_text %}To Do Lists{% endblock %}
 {% block sub_center_text %}Get Things Done!{% endblock %}
 
 
-{%block body_style %}<body class="index-page sidebar-collapse">{% endblock %}
+{%block body_style %}
+  <body class="index-page sidebar-collapse">{% endblock %}
   {% block detail_content %}
-   <div class="main main-raised">
-    <div class="profile-content">
-      <div class="container">
-        <div class="title">
-          <h2>Task Details</h2>
-        </div>
-        <!--  buttons -->
-       
+   
+    <div class="main main-raised">
+      <div class="profile-content">
+        <div class="container">
+          <div class="title">
+            <h2>Task Details</h2>
+          </div>
+          <!--  buttons -->
           <div class="row">
             <div class="tim-typo">
               <h3>
-                <span class = "col-4"><i class="material-icons">assignment</i></span><span class="col-8">{{task}}</span></h3>
+                <span class = "col-4">
+                  <i class="material-icons">assignment</i>
+                </span>
+                <span class="col-8">{{task}}</span>
+              </h3>
             </div>
           </div>
           <div class="row">
             <div class="tim-typo">
               <h3>
-                <span class = "col-4"><i class="material-icons">hourglass_empty</i></span><span class="col-8">{{task.DueDate}}</span></h3>
+                <span class = "col-4">
+                  <i class="material-icons">hourglass_empty</i>
+                </span>
+                <span class="col-8">{{task.DueDate}}</span>
+              </h3>
             </div>
           </div>
-        <div class="row">
+          <div class="row">
             <div class="tim-typo">
               <h3>
-                <span class = "col-4"><i class="material-icons">notes</i></span><span class="col-8">{{task.Description}}</span></h3>
+                <span class = "col-4">
+                  <i class="material-icons">notes</i>
+                </span>
+                <span class="col-8">{{task.Description}}</span>
+              </h3>
             </div>
           </div>
-        
-             <footer class="footer footer-default">
-    <div class="container">
-      <nav class="float-left">
-        <ul>
-          <li>
-            <a href="{% url 'tasks:delete_task' task.pk %}"><i class="material-icons">edit</i>
+          <footer class="footer footer-default">
+            <div class="container">
+              <nav class="float-left">
+                <ul>
+                  <li>
+                    <a href="{% url 'tasks:delete_task' task.pk %}">
+                      <i class="material-icons">edit</i>
               Edit Task
-            </a></li>
-           <li>
-            <a href="{% url 'tasks:delete_task' task.pk %}"><i class="material-icons">delete</i>
+            
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'tasks:delete_task' task.pk %}">
+                      <i class="material-icons">delete</i>
               Delete Task
-            </a></li>
-        </ul>
-      </nav>
-
-    </div>
-  </footer>
+            
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </footer>
+        </div>
       </div>
     </div>
-  </div>
 {% endblock %}
