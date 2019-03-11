@@ -1,9 +1,10 @@
+from django.conf.urls import url
 from django.contrib.auth import login
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 import datetime
 
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from tasks.views import IndexView
 from .models import Tasks
@@ -68,9 +69,10 @@ class TaskIndexView(TestCase):
         response = self.client.get("")
         self.assertEqual(response.status_code, 302)  # redirects to login page.
         login = self.client.login(username='user1', password='pass1')
-        response = self.client.get("",follow=True)
+
+        response = self.client.get("", follow=True)
         print("error here", response.status_code)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, 200)
 
         # Check our user is logged in
         self.assertEqual(str(response.context['user']), 'user1')
@@ -78,3 +80,52 @@ class TaskIndexView(TestCase):
 
         # Check we used correct template
         self.assertTemplateUsed(response, 'tasks/homepage.html')
+        self.client.logout()
+
+
+# __________CHECKING VIEW PROTECTION_____________
+
+
+class EditTaskByUserViewTest(TestCase):
+    def setUp(self):
+        # Create two users
+        self.test_user1 = User.objects.create_user(username='testuser1', password='testuser1')
+        self.test_user2 = User.objects.create_user(username='testuser2', password='testuser2')
+
+        self.test_user1.save()
+        self.test_user2.save()
+
+        # Create a book
+        self.test_task1 = Tasks.objects.create(user=User.objects.get(id=1), TaskName='user1\'s task',
+                                               Description='abcd',
+                                               DueDate=datetime.date.today() + datetime.timedelta(days=1), priority=1)
+        self.test_task2 = Tasks.objects.create(user=User.objects.get(id=2), TaskName='user2\'s task',
+                                               Description='abcd',
+                                               DueDate=datetime.date.today() + datetime.timedelta(days=2), priority=1)
+
+    def test_redirect_if_not_logged_in(self):
+        response = self.client.get('')
+        self.assertRedirects(response, '/login')
+
+    def test_logged_in_uses_correct_template(self):
+        login = self.client.login(username='testuser1', password='testuser1')
+        response = self.client.get("", follow=True)
+
+        # Check our user is logged in
+        self.assertEqual(str(response.context['user']), 'testuser1')
+        # Check that we got a response "success"
+        self.assertEqual(response.status_code, 200)
+
+        # Check we used correct template
+        self.assertTemplateUsed(response, 'tasks/todolist40.html')
+
+        # checking user1 can view, edit or delete task of user2
+        response = self.client.get(reverse('tasks:detail', kwargs=dict(pk=self.test_task2.pk)))
+        self.assertEqual(response.status_code, 404)
+
+        response = self.client.get(reverse('tasks:update_task', kwargs=dict(pk=self.test_task2.pk)))
+        self.assertEqual(response.status_code, 404)
+
+        response = self.client.get(reverse('tasks:delete_task', kwargs=dict(pk=self.test_task2.pk)))
+        self.assertEqual(response.status_code, 404)
+        self.client.logout()
