@@ -4,7 +4,7 @@ from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 import datetime
 
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy, NoReverseMatch
 
 from tasks.views import IndexView
 from .models import Tasks
@@ -102,6 +102,9 @@ class EditTaskByUserViewTest(TestCase):
         self.test_task2 = Tasks.objects.create(user=User.objects.get(id=2), TaskName='user2\'s task',
                                                Description='abcd',
                                                DueDate=datetime.date.today() + datetime.timedelta(days=2), priority=1)
+        self.test_task3 = Tasks.objects.create(user=User.objects.get(id=1), TaskName='user1\'s task',
+                                               Description='task3,to be deleted',
+                                               DueDate=datetime.date.today() + datetime.timedelta(days=1), priority=1)
 
     def test_redirect_if_not_logged_in(self):
         response = self.client.get('')
@@ -129,3 +132,13 @@ class EditTaskByUserViewTest(TestCase):
         response = self.client.get(reverse('tasks:delete_task', kwargs=dict(pk=self.test_task2.pk)))
         self.assertEqual(response.status_code, 404)
         self.client.logout()
+
+        # checking deletion
+        self.test_task3.delete()
+
+        with self.assertRaises(NoReverseMatch):
+            response = self.client.get(reverse('tasks:detail', kwargs=dict(pk=self.test_task3.pk)))
+
+        # checking editing
+        self.test_task1.TaskName = "edited task"
+        self.assertEqual(self.test_task1.TaskName,'edited task')
